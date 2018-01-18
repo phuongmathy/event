@@ -1,7 +1,7 @@
 ---
 - hosts: all
   sudo: yes
-  
+
   vars_files:
     - vars/defaults.yml
 
@@ -32,3 +32,5 @@
 
   roles:
      - { role: geerlingguy.nginx }
+     - { role: lesmyrmidons.mongodb }
+     - { role: phuongmathy.config }

@@ -1,0 +1,9 @@
+# Install sails
+- name: install sails
+  shell: sudo npm install sails -g
+
+# Add host local
+- name: add Host to local
+  shell: echo "127.0.0.1  {{ item }}" >> /etc/hosts
+  with_items:
+    - dev.event
