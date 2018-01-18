@@ -1,0 +1,34 @@
+---
+- hosts: all
+  sudo: yes
+  
+  vars_files:
+    - vars/defaults.yml
+
+  pre_tasks:
+    - name: Ensure build dependencies are installed (RedHat).
+      yum: name={{item}} state=present
+      with_items:
+        - which
+        - nano
+        - wget
+      when: ansible_os_family == 'RedHat'
+
+    - name: add Node Js repo
+      shell: curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+
+    - name: install node js
+      shell: yum -y install nodejs
+
+    - name: "Python 2.6 SNI support: install Python modules"
+      pip: >
+        name={{item}}
+        state=present
+      with_items:
+        - urllib3
+        - pyopenssl
+        - ndg-httpsclient
+        - pyasn1
+
+  roles:
+     - { role: geerlingguy.nginx }

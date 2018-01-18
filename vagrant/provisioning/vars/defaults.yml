@@ -1,0 +1,4 @@
+# global
+ansible_user : "vagrant"
+aws_cli_user : "root"
+project_root: "/vagrant"
